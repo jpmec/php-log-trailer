@@ -1,0 +1,44 @@
+
+<div ng-controller="LogsCtrl">
+
+  <h1><i class="fa fa-files-o fa-fw"></i> Logs</h1>
+  <hr>
+
+  Expand All: <input type="checkbox">
+
+  <accordion close-others="false">
+    <accordion-group ng-repeat="(filename, log) in logs.value" is-open="true">
+
+      <accordion-heading>
+        <span class='text-info'>{{log.mtime | date:'medium'}} ({{log.size}} Bytes)</span> {{filename}}
+      </accordion-heading>
+
+      {{log !== null}}
+
+      <tabset>
+
+        <tab heading="Tail">
+          <p>&nbsp</p>
+          <div>
+            <pre>{{log.tail}}</pre>
+          </div>
+        </tab>
+
+        <tab heading="Stats">
+          <p>&nbsp</p>
+          <div>
+            <table class="table">
+              <tr><td class="text-right">Size (bytes):</td><td>{{log.size}}</td></tr>
+              <tr><td class="text-right">Modified Time:</td><td>{{log.mtime | date:'medium'}}</td></tr>
+              <tr><td class="text-right">Access Time:</td><td>{{log.atime | date:'medium'}}</td></tr>
+              <tr><td class="text-right">Created Time:</td><td>{{log.ctime | date:'medium'}}</td></tr>
+            </table>
+          </div>
+
+        </tab>
+      </tabset>
+    </accordion-group>
+
+  </accordion>
+
+</div>
